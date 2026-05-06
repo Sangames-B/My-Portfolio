@@ -448,25 +448,29 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.25rem; }
-    section { padding: 5rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    nav { padding: 1rem 1rem; }
+    .nav-links { gap: 1rem; }
+    section { padding: 3.5rem 1rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.25rem; }
 
-    /* Stack hero content on small screens */
+    /* Stack hero content on small screens and reduce large empty space */
     #hero {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding-top: 4.5rem;
-      padding-bottom: 3rem;
-      gap: 1.5rem;
+      padding: 3.25rem 1.25rem 2.5rem 1.25rem;
+      gap: 1.25rem;
+      min-height: 70vh;
     }
 
-    .hero-inner { max-width: 100%; }
-    .profile-image { width: 220px; height: auto; }
+    .hero-inner { max-width: 100%; padding: 0; }
+    .hero-inner h1, .hero-inner p { margin-left: 0; margin-right: 0; }
+    .hero-scroll { margin-top: 2rem; }
+
+    .profile-image { width: 220px; height: auto; margin: 0 auto; }
+    .hero-aside { width: 100%; display: flex; justify-content: center; }
 
     /* Hide desktop nav links and show toggle */
     .nav-links { display: none; }
@@ -478,7 +482,7 @@
       flex-direction: column;
       position: absolute;
       top: 100%;
-      right: 1.5rem;
+      right: 1rem;
       background: var(--surface);
       padding: 0.5rem 0.75rem;
       border-radius: 12px;
