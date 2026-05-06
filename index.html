@@ -19,6 +19,9 @@
     --border: rgba(0,0,0,0.08);
     --serif: 'DM Serif Display', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
+
+    /* NAV / layout helpers */
+    --nav-height: 64px; /* used to offset fixed nav */
   }
 
   html { scroll-behavior: smooth; }
@@ -29,6 +32,7 @@
     color: var(--text);
     font-size: 16px;
     line-height: 1.7;
+    padding-top: var(--nav-height); /* ensure fixed nav doesn't cover top content */
   }
 
   /* ── NAV ── */
@@ -39,7 +43,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 4rem;
+    height: var(--nav-height);
+    padding: 0 4rem; /* left/right padding kept, vertical spacing inside fixed height */
     background: rgba(247,245,242,0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -97,17 +102,23 @@
 
   /* ── HERO ── */
   #hero {
-    min-height: 100vh;
+    /* account for fixed nav + consistent spacing */
+    min-height: calc(100vh - var(--nav-height));
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
-    gap: 3rem;
-    padding: 7rem 4rem 6rem 4rem;
+    gap: 2.5rem;
+    padding: calc(var(--nav-height) + 2.5rem) 4rem 6rem 4rem;
   }
 
-  .hero-inner { max-width: 780px; text-align: left; }
+  .hero-inner {
+    flex: 1 1 580px; /* allow text block to take available space and avoid being pushed right */
+    max-width: 780px;
+    text-align: left;
+    padding-right: 1rem; /* small breathing room from the image */
+  }
 
   .profile-image {
     width: 320px;
@@ -119,7 +130,7 @@
     height: auto;
   }
 
-  .hero-aside { flex-shrink: 0; }
+  .hero-aside { flex-shrink: 0; display:flex; align-items:center; justify-content:center; }
 
   .hero-tag {
     display: inline-block;
@@ -447,30 +458,49 @@
   .delay-4 { animation-delay: 0.6s;  }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1rem; }
+
+  /* Tablet: keep two-column hero but reduce sizes so text + image fit */
+  @media (max-width: 900px) {
+    nav { padding: 0 1rem; }
+    section { padding: 3.5rem 1.25rem; }
+
+    #hero {
+      padding: calc(var(--nav-height) + 1.75rem) 1.25rem 2.5rem 1.25rem;
+      gap: 1.25rem;
+      min-height: 60vh;
+    }
+
+    .hero-inner { max-width: 100%; padding-right: 0.5rem; }
+    .hero-aside { margin-left: 0.25rem; }
+
+    .profile-image { width: 240px; height: auto; }
+  }
+
+  /* Mobile: stack hero, center content and shrink image */
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
     .nav-links { gap: 1rem; }
-    section { padding: 3.5rem 1rem; }
+    section { padding: 3.25rem 1rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
     footer { flex-direction: column; gap: 0.5rem; padding: 1.25rem; }
 
-    /* Stack hero content on small screens and reduce large empty space */
+    /* Stack hero content on phones and remove extra empty space */
     #hero {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 3.25rem 1.25rem 2.5rem 1.25rem;
-      gap: 1.25rem;
-      min-height: 70vh;
+      padding: calc(var(--nav-height) + 1rem) 1rem 2rem 1rem;
+      gap: 1rem;
+      min-height: 60vh;
     }
 
     .hero-inner { max-width: 100%; padding: 0; }
     .hero-inner h1, .hero-inner p { margin-left: 0; margin-right: 0; }
-    .hero-scroll { margin-top: 2rem; }
+    .hero-scroll { margin-top: 1.75rem; }
 
-    .profile-image { width: 220px; height: auto; margin: 0 auto; }
-    .hero-aside { width: 100%; display: flex; justify-content: center; }
+    .profile-image { width: 180px; height: auto; margin: 0 auto; }
+    .hero-aside { width: 100%; display: flex; justify-content: center; margin-top: 0.75rem; }
 
     /* Hide desktop nav links and show toggle */
     .nav-links { display: none; }
@@ -481,7 +511,7 @@
       display: flex;
       flex-direction: column;
       position: absolute;
-      top: 100%;
+      top: var(--nav-height);
       right: 1rem;
       background: var(--surface);
       padding: 0.5rem 0.75rem;
@@ -496,10 +526,10 @@
   }
 
   @media (max-width: 480px) {
-  .about-numbers {
-    grid-template-columns: 1fr;
+    .about-numbers {
+      grid-template-columns: 1fr;
     }
-    .profile-image { width: 180px; }
+    .profile-image { width: 160px; }
   }
 </style>
 </head>
