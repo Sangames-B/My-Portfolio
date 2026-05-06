@@ -130,7 +130,15 @@
     height: auto;
   }
 
-  .hero-aside { flex-shrink: 0; display:flex; align-items:center; justify-content:center; }
+  .hero-aside {
+    flex-shrink: 0; 
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+  }
+
+  /* hide the inline/mobile image by default (show only in small screens) */
+  .hero-inline-img { display: none; }
 
   .hero-tag {
     display: inline-block;
@@ -475,7 +483,7 @@
 
     .profile-image { width: 240px; height: auto; }
   }
-
+  .hero-inline-img { display: none; }
   /* Mobile: stack hero, center content and shrink image */
   @media (max-width: 600px) {
     nav { padding: 0 1rem; }
@@ -490,17 +498,40 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: calc(var(--nav-height) + 1rem) 1rem 2rem 1rem;
+      /* reduced bottom padding to tighten space below hero on mobile */
+      padding: calc(var(--nav-height) + 1rem) 1rem 1rem 1rem;
       gap: 1rem;
       min-height: 60vh;
     }
 
     .hero-inner { max-width: 100%; padding: 0; }
-    .hero-inner h1, .hero-inner p { margin-left: 0; margin-right: 0; }
-    .hero-scroll { margin-top: 1.75rem; }
 
-    .profile-image { width: 180px; height: auto; margin: 0 auto; }
-    .hero-aside { width: 100%; display: flex; justify-content: center; margin-top: 0.75rem; }
+    /* NEW: a row that places paragraph and image side-by-side on small screens */
+    .hero-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      width: 100%;
+    }
+
+    .hero-sub {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* show the inline image and hide the desktop aside on mobile */
+    .hero-inline-img { display: block; flex: 0 0 auto; }
+    .hero-inline-img .profile-image { width: 110px; border-radius: 12px; }
+
+    /* hide the desktop aside image so we don't have two images */
+    .hero-aside { display: none; }
+
+    .hero-actions { margin-top: 1rem; }
+    /* smaller gap between actions and the scroll hint */
+    .hero-scroll { margin-top: 0.9rem; text-align: left; }
 
     /* Hide desktop nav links and show toggle */
     .nav-links { display: none; }
@@ -561,26 +592,38 @@
   <div class="hero-inner">
     <div class="hero-tag fade-up">Available for opportunities</div>
     <h1 class="fade-up delay-1">Sangameswaran<br /><em>B.</em></h1>
-    <p class="hero-sub fade-up delay-2">
-      Computer Science student passionate about building clean, meaningful software.
-      I turn ideas into working products.
-    </p>
-    <div class="hero-actions fade-up delay-3">
-      <a href="#projects" class="btn btn-primary">View my work</a>
-      <a href="#contact" class="btn btn-outline">Get in touch</a>
+
+    <!-- NEW: hero-row contains the paragraph and an inline image visible only on small screens -->
+    <div class="hero-row fade-up delay-2">
+      <p class="hero-sub">
+        Computer Science student passionate about building clean, meaningful software.
+        I turn ideas into working products.
+      </p>
+
+      <!-- Inline image: duplicate of the main profile image but only shown on mobile.
+           Replace src value with your actual image path or keep to reuse existing image. -->
+      <div class="hero-inline-img" aria-hidden="true">
+        <img class="profile-image" src="assets/profile_pic.jpeg" alt="Profile image">
+      </div>
     </div>
+
+    <div class="hero-actions fade-up delay-3">
+      <a class="btn btn-primary" href="#projects">View my work</a>
+      <a class="btn btn-outline" href="#contact">Get in touch</a>
+    </div>
+
     <div class="hero-scroll fade-up delay-4">
       <span class="scroll-line"></span>
       <span>Scroll to explore</span>
     </div>
   </div>
+
+  <!-- Keep the original aside image for desktop. It will be hidden on mobile via CSS above.
+       Move your existing desktop image markup here if it's located elsewhere. -->
   <div class="hero-aside">
-      <img
-        src="assets/profile_pic.jpeg"
-        alt="Sangameswaran B"
-        class="profile-image"
-      />
-    </div>
+    <!-- Desktop/profile image (visible on desktop/tablet). If you already have an <img> here, leave it as-is. -->
+    <img class="profile-image" src="assets/profile_pic.jpeg" alt="Profile image">
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════
