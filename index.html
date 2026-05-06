@@ -563,6 +563,25 @@
     }
     .profile-image { width: 160px; }
   }
+
+  .cert-section { padding: 5rem 4rem; background: #ffffff; }
+.cert-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.cert-heading { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 2rem; color: var(--text); }
+.cert-carousel-wrap { position: relative; display: flex; align-items: center; gap: 1rem; }
+.cert-track-outer { overflow: hidden; flex: 1; }
+.cert-track { display: flex; gap: 1.25rem; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+.cert-card { flex: 0 0 200px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; cursor: pointer; text-decoration: none; display: block; transition: transform 0.2s, border-color 0.2s; }
+.cert-card:hover { transform: translateY(-3px); border-color: rgba(0,0,0,0.2); }
+.cert-thumb { width: 100%; height: 130px; background: var(--surface); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border); }
+.cert-thumb img { width: 100%; height: 130px; object-fit: cover; }
+.cert-thumb-icon { font-size: 40px; color: var(--muted); }
+.cert-info { padding: 0.85rem 1rem; }
+.cert-name { font-size: 0.88rem; font-weight: 500; color: var(--text); line-height: 1.3; margin-bottom: 0.25rem; }
+.cert-issuer { font-size: 0.75rem; color: var(--muted); }
+.arrow-btn { flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, transform 0.15s; font-size: 18px; }
+.arrow-btn:hover { background: var(--bg); }
+.arrow-btn:active { transform: scale(0.95); }
+.arrow-btn:disabled { opacity: 0.3; cursor: default; }
 </style>
 </head>
 <body>
@@ -581,6 +600,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -769,22 +789,61 @@
     <div class="edu-list">
 
       <div class="edu-item">
-        <div class="edu-year">2022 – Present</div>
+        <div class="edu-year">2025 – Present</div>
         <div>
-          <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
-          <div class="edu-school">Your University Name — Coimbatore, Tamil Nadu</div>
-          <div class="edu-detail">CGPA: X.X / 10 · Relevant coursework: Data Structures, Algorithms, DBMS, OS, Networks</div>
+          <div class="edu-degree">Bachelor of Computer Applications</div>
+          <div class="edu-school">PSG College of Arts &amp; Science — Coimbatore, Tamil Nadu</div>
+          <div class="edu-detail">Pursuing my Undergraduate Degree at present</div>
         </div>
       </div>
 
       <div class="edu-item">
-        <div class="edu-year">2020 – 2022</div>
+        <div class="edu-year">2010 - 2025</div>
         <div>
-          <div class="edu-degree">Higher Secondary (12th Grade)</div>
-          <div class="edu-school">Your School Name — Tamil Nadu</div>
-          <div class="edu-detail">Score: XX% · Science stream with Computer Science</div>
+          <div class="edu-degree">Carmel Garden Matriculation School</div>
+          <div class="edu-school">Coimbatore, Tamil Nadu</div>
+          <div class="edu-detail">Computer Science</div>
         </div>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CERTIFICATIONS
+     TODO: Replace with your real certifications
+     To add more: duplicate any <a class="cert-card"> block
+     To use a PDF thumbnail: replace the icon div with
+     <img src="assets/cert1.jpg"> inside .cert-thumb
+═══════════════════════════════════════ -->
+<section id="certifications" class="cert-section">
+  <div class="section-wrap">
+    <p class="cert-label">Certifications & Licenses</p>
+    <h2 class="cert-heading">What I've earned.</h2>
+    <div class="cert-carousel-wrap">
+
+      <button class="arrow-btn" id="prevBtn" aria-label="Previous" disabled>&#8592;</button>
+
+      <div class="cert-track-outer">
+        <div class="cert-track" id="certTrack">
+
+          <!-- Card 1 — TODO: update href, name, issuer, year -->
+          <a class="cert-card" href="https://your-credential-link.com" target="_blank">
+            <div class="cert-thumb">
+              <!-- Replace below with <img src="assets/cert1.jpg"> if you have a thumbnail -->
+              <img src="assets/Microsoft_Full-Stack_Developer.png" alt="Certification Name">
+            </div>
+            <div class="cert-info">
+              <div class="cert-name">Your Certification Name</div>
+              <div class="cert-issuer">Microsoft &middot; 2026</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <button class="arrow-btn" id="nextBtn" aria-label="Next">&#8594;</button>
 
     </div>
   </div>
